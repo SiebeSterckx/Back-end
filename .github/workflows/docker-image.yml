@@ -43,3 +43,11 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/backend:latest
+
+  webhook:
+    needs: docker
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: "Build & test"
+        run: curl -X POST http://193.191.176.81:9000/api/webhooks/db6c73e0-8341-4c28-8d2f-9ad7268ee075
